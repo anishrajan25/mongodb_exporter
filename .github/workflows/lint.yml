@@ -12,11 +12,6 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
 
-      - name: Set up Go
-        uses: actions/setup-go@v4
-        with:
-          go-version-file: ${{ github.workspace }}/go.mod
-
       - name: Initialize dependencies and linters
         run: make init
 
