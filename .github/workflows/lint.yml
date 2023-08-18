@@ -7,11 +7,19 @@ jobs:
     name: Lint Check
 
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: checkout
         uses: actions/checkout@v3
-        
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version-file: ${{ github.workspace }}/go.mod
+
+      - name: Initialize dependencies and linters
+        run: make init
+
       - name: Run checks/linters
         run: |
           # use GITHUB_TOKEN because only it has access to GitHub Checks API
