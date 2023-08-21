@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: checkout
+      - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Set up Go
@@ -27,13 +27,13 @@ jobs:
         with:
           go-version-file: ${{ github.workspace }}/go.mod
 
+      - name: Initialize dependencies and linters
+        run: make init
+
       - name: Diff
         run: |
           make format
           git diff --exit-code
-
-      - name: Initialize dependencies and linters
-        run: make init
 
       - name: Run checks/linters
         run: |
